@@ -4,9 +4,16 @@ package HibernateUntils;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import Models.ChiTietTienPhong;
 import Models.ChuNha;
+import Models.DichVu;
 import Models.NguoiThue;
+import Models.NhaTro;
+import Models.Phong;
+import Models.SuCoKH;
+import Models.SuCoNhaTro;
 import Models.TaiKhoan;
+import Models.TienPhong;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -39,6 +46,13 @@ public class HibernateUtils {
         conf.addAnnotatedClass(TaiKhoan.class);
         conf.addAnnotatedClass(ChuNha.class);
         conf.addAnnotatedClass(NguoiThue.class);
+        conf.addAnnotatedClass(NhaTro.class);
+        conf.addAnnotatedClass(Phong.class);
+        conf.addAnnotatedClass(SuCoNhaTro.class);
+        conf.addAnnotatedClass(DichVu.class);
+        conf.addAnnotatedClass(SuCoKH.class);
+        conf.addAnnotatedClass(TienPhong.class);
+        conf.addAnnotatedClass(ChiTietTienPhong.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
