@@ -38,15 +38,14 @@ public class ChuNha {
     
     @Column(name = "DiaChi")
     private String diaChi;
-
-    public ChuNha(UUID id, String hoTen, String sdt, String email, String diaChi, List<TaiKhoan> taiKhoans) {
-        this.id = id;
-        this.hoTen = hoTen;
-        this.sdt = sdt;
-        this.email = email;
-        this.diaChi = diaChi;
-        this.taiKhoans = taiKhoans;
-    }
+    
+    @OneToMany(mappedBy = "chuNha",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TaiKhoan> taiKhoans;
+    
+    @OneToMany(mappedBy = "chuNha",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<NhaTro> nhaTros;
 
     public UUID getId() {
         return id;
@@ -95,10 +94,24 @@ public class ChuNha {
     public void setTaiKhoans(List<TaiKhoan> taiKhoans) {
         this.taiKhoans = taiKhoans;
     }
-    
-    @OneToMany(mappedBy = "chuNha",
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TaiKhoan> taiKhoans;
+
+    public List<NhaTro> getNhaTros() {
+        return nhaTros;
+    }
+
+    public void setNhaTros(List<NhaTro> nhaTros) {
+        this.nhaTros = nhaTros;
+    }
+
+    public ChuNha(UUID id, String hoTen, String sdt, String email, String diaChi, List<TaiKhoan> taiKhoans, List<NhaTro> nhaTros) {
+        this.id = id;
+        this.hoTen = hoTen;
+        this.sdt = sdt;
+        this.email = email;
+        this.diaChi = diaChi;
+        this.taiKhoans = taiKhoans;
+        this.nhaTros = nhaTros;
+    }
     
     public ChuNha(){
     }

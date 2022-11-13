@@ -34,32 +34,9 @@ public class NguoiThue {
             cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TaiKhoan> taiKhoans;
     
-    @Column(name = "Ma")
-    private String ma;
-    
-    @Column(name = "HoTen")
-    private String hoTen;
-
-    @Column(name = "NgaySinh")
-    private Date ngaySinh;
-
-    @Column(name = "GioiTinh")
-    private String gioiTinh;
-
-    @Column(name = "Sdt")
-    private String sdt;
-
-    @Column(name = "DiaChi")
-    private String diaChi;
-    
-    @Column(name = "DiXe")
-    private String diXe;
-
-    @Column(name = "TrangThai")
-    private String trangThai;
-    
-    public NguoiThue(){
-    }
+    @OneToMany(mappedBy = "nguoiThue",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Phong> phongs;
 
     public UUID getId() {
         return id;
@@ -75,6 +52,14 @@ public class NguoiThue {
 
     public void setTaiKhoans(List<TaiKhoan> taiKhoans) {
         this.taiKhoans = taiKhoans;
+    }
+
+    public List<Phong> getPhongs() {
+        return phongs;
+    }
+
+    public void setPhongs(List<Phong> phongs) {
+        this.phongs = phongs;
     }
 
     public String getMa() {
@@ -141,6 +126,20 @@ public class NguoiThue {
         this.trangThai = trangThai;
     }
 
+    public NguoiThue(UUID id, List<TaiKhoan> taiKhoans, List<Phong> phongs, String ma, String hoTen, Date ngaySinh, String gioiTinh, String sdt, String diaChi, String diXe, String trangThai) {
+        this.id = id;
+        this.taiKhoans = taiKhoans;
+        this.phongs = phongs;
+        this.ma = ma;
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.diXe = diXe;
+        this.trangThai = trangThai;
+    }
+
     public NguoiThue(UUID id, String ma, String hoTen, Date ngaySinh, String gioiTinh, String sdt, String diaChi, String diXe, String trangThai) {
         this.id = id;
         this.ma = ma;
@@ -152,20 +151,31 @@ public class NguoiThue {
         this.diXe = diXe;
         this.trangThai = trangThai;
     }
-
-    public NguoiThue(UUID id, List<TaiKhoan> taiKhoans, String ma, String hoTen, Date ngaySinh, String gioiTinh, String sdt, String diaChi, String diXe, String trangThai) {
-        this.id = id;
-        this.taiKhoans = taiKhoans;
-        this.ma = ma;
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
-        this.gioiTinh = gioiTinh;
-        this.sdt = sdt;
-        this.diaChi = diaChi;
-        this.diXe = diXe;
-        this.trangThai = trangThai;
-    }
-
     
-   
+    @Column(name = "Ma")
+    private String ma;
+    
+    @Column(name = "HoTen")
+    private String hoTen;
+
+    @Column(name = "NgaySinh")
+    private Date ngaySinh;
+
+    @Column(name = "GioiTinh")
+    private String gioiTinh;
+
+    @Column(name = "Sdt")
+    private String sdt;
+
+    @Column(name = "DiaChi")
+    private String diaChi;
+    
+    @Column(name = "DiXe")
+    private String diXe;
+
+    @Column(name = "TrangThai")
+    private String trangThai;
+    
+    public NguoiThue(){
+    } 
 }
