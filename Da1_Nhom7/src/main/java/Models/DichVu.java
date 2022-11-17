@@ -42,10 +42,10 @@ public class DichVu {
     
     @Column(name ="DonGia")
     private int donGia;
-    
-    @OneToMany(mappedBy = "dichVu",
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ChiTietTienPhong> chiTietTienPhongs;
+
+    public DichVu() {
+        
+    }
 
     public UUID getId() {
         return id;
@@ -87,20 +87,11 @@ public class DichVu {
         this.donGia = donGia;
     }
 
-    public List<ChiTietTienPhong> getChiTietTienPhongs() {
-        return chiTietTienPhongs;
-    }
-
-    public void setChiTietTienPhongs(List<ChiTietTienPhong> chiTietTienPhongs) {
-        this.chiTietTienPhongs = chiTietTienPhongs;
-    }
-
     public DichVu(UUID id, NhaTro nhaTro, String ma, String tenDichVu, int donGia, List<ChiTietTienPhong> chiTietTienPhongs) {
         this.id = id;
         this.nhaTro = nhaTro;
         this.ma = ma;
         this.tenDichVu = tenDichVu;
         this.donGia = donGia;
-        this.chiTietTienPhongs = chiTietTienPhongs;
     }
 }

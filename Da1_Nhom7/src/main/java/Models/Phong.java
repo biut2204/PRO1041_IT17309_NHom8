@@ -52,6 +52,27 @@ public class Phong {
     
     @Column(name ="SoNguoiHienCo")
     private int soNguoiHienCo;
+    
+    @Column(name ="SoXe")
+    private int soXe;
+    
+    @Column(name ="TinhTrang")
+    private String tinhTrang;
+    
+    @Column(name ="HinhAnhHopDong")
+    private String hinhAnhHopDong;
+    
+    @OneToMany(mappedBy = "phong",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TienPhong> tienPhongs;
+    
+    @OneToMany(mappedBy = "phong",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SuCoKH> suCoKHs;
+    
+    @OneToMany(mappedBy = "phong",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<HopDong> hopDongs;
 
     public UUID getId() {
         return id;
@@ -157,7 +178,15 @@ public class Phong {
         this.suCoKHs = suCoKHs;
     }
 
-    public Phong(UUID id, NhaTro nhaTro, NguoiThue nguoiThue, String ma, String tenPhong, int giaPhong, float dienTich, int soNguoiHienCo, int soXe, String tinhTrang, String hinhAnhHopDong, List<TienPhong> tienPhongs, List<SuCoKH> suCoKHs) {
+    public List<HopDong> getHopDongs() {
+        return hopDongs;
+    }
+
+    public void setHopDongs(List<HopDong> hopDongs) {
+        this.hopDongs = hopDongs;
+    }
+
+    public Phong(UUID id, NhaTro nhaTro, NguoiThue nguoiThue, String ma, String tenPhong, int giaPhong, float dienTich, int soNguoiHienCo, int soXe, String tinhTrang, String hinhAnhHopDong, List<TienPhong> tienPhongs, List<SuCoKH> suCoKHs, List<HopDong> hopDongs) {
         this.id = id;
         this.nhaTro = nhaTro;
         this.nguoiThue = nguoiThue;
@@ -171,24 +200,8 @@ public class Phong {
         this.hinhAnhHopDong = hinhAnhHopDong;
         this.tienPhongs = tienPhongs;
         this.suCoKHs = suCoKHs;
+        this.hopDongs = hopDongs;
     }
-    
-    @Column(name ="SoXe")
-    private int soXe;
-    
-    @Column(name ="TinhTrang")
-    private String tinhTrang;
-    
-    @Column(name ="HinhAnhHopDong")
-    private String hinhAnhHopDong;
-    
-    @OneToMany(mappedBy = "phong",
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TienPhong> tienPhongs;
-    
-    @OneToMany(mappedBy = "phong",
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SuCoKH> suCoKHs;
 
     public Phong(){
     }
