@@ -41,6 +41,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
         initComponents();
         LoadNhaTro(ntR.getAllData());
         LoadTaoPhong(pR.getAllData());
+        LoadTTPhong(pR.getAllData());
         txt_maphong.setEditable(false);
         Icon icon10 = new ImageIcon("obama.PNG");
         this.lbl_anh.setIcon(icon10);
@@ -64,6 +65,16 @@ public class QLNhaTroView extends javax.swing.JFrame {
                 phong.getMa(), phong.getNhaTro().getTenNha(), phong.getNguoiThue().getHoTen(),
                 phong.getTenPhong(), phong.getGiaPhong(), phong.getDienTich(), phong.getHinhAnhHopDong()});
         }
+    }
+
+    private void LoadTTPhong(List<Phong> list) {
+        dtm = (DefaultTableModel) tblTTPhong.getModel();
+        dtm.setRowCount(0);
+        for (Phong phong : list) {
+            dtm.addRow(new Object[]{
+                phong.getTenPhong(), phong.getSoXe(), phong.getGiaPhong(), phong.getSoNguoiHienCo(), phong.getDienTich(), phong.getTinhTrang()});
+        }
+
     }
 
     /**
@@ -115,8 +126,20 @@ public class QLNhaTroView extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtTenPhong = new javax.swing.JTextField();
+        txtGiaTien = new javax.swing.JTextField();
+        txtSoNguoiHienCo = new javax.swing.JTextField();
+        txtSoXe = new javax.swing.JTextField();
+        txtDienTich = new javax.swing.JTextField();
+        txtTinhTrang = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblTTPhong = new javax.swing.JTable();
+        btnSuaTTPhong = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -217,7 +240,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
                         .addComponent(btn_suant)
                         .addGap(81, 81, 81)
                         .addComponent(btn_clearnt)))
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addContainerGap(577, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,7 +401,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)
                                 .addComponent(lbl_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,11 +426,40 @@ public class QLNhaTroView extends javax.swing.JFrame {
 
         jLabel10.setText("Ten phong :");
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setText("Số xe :");
 
-        jLabel12.setText("So nguoi");
+        jLabel12.setText("Giá tiền : ");
 
-        jLabel13.setText("jLabel13");
+        jLabel13.setText("Số người hiện có : ");
+
+        jLabel14.setText("Diện tích : ");
+
+        jLabel15.setText("Tình trạng : ");
+
+        tblTTPhong.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Tên phòng", "Số xe", "Giá tiền", "Số người hiện có", "Diện tích", "Tình trạng"
+            }
+        ));
+        tblTTPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTTPhongMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblTTPhong);
+
+        btnSuaTTPhong.setText("Sửa");
+        btnSuaTTPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaTTPhongActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -417,25 +469,63 @@ public class QLNhaTroView extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                .addGap(180, 180, 180)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGiaTien, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoXe, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDienTich, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSoNguoiHienCo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(229, 229, 229)
+                .addComponent(btnSuaTTPhong)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel12))
-                .addGap(39, 39, 39)
+                    .addComponent(jLabel13)
+                    .addComponent(txtTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoNguoiHienCo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel13))
-                .addContainerGap(248, Short.MAX_VALUE))
+                    .addComponent(jLabel14)
+                    .addComponent(txtDienTich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoXe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel15)
+                    .addComponent(txtGiaTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(btnSuaTTPhong)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -445,14 +535,14 @@ public class QLNhaTroView extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(444, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Thong tin phong", jPanel7);
@@ -461,7 +551,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 866, Short.MAX_VALUE)
+            .addGap(0, 1141, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,7 +564,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 866, Short.MAX_VALUE)
+            .addGap(0, 1141, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -482,6 +572,19 @@ public class QLNhaTroView extends javax.swing.JFrame {
         );
 
         jTabbedPane2.addTab("Dich vu", jPanel2);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1141, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 447, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("tab6", jPanel4);
 
         jDesktopPane1.setLayer(jTabbedPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -509,7 +612,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,9 +625,186 @@ public class QLNhaTroView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_diachiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_diachiActionPerformed
+    private void btnSuaTTPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaTTPhongActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_diachiActionPerformed
+        int index = tblTTPhong.getSelectedRow();
+        Phong phong = pR.getAllData().get(index);
+        NhaTro nhatro = new NhaTro();
+        NguoiThue nguoithue = new NguoiThue();
+
+        String tenPhong = txtTenPhong.getText().trim();
+        String tinhTrang = txtTinhTrang.getText().trim();
+        int soXe = Integer.parseInt(txtSoXe.getText().trim());
+        int soNguoi = Integer.parseInt(txtSoNguoiHienCo.getText().trim());
+        int giaTien = Integer.parseInt(txtGiaTien.getText().trim());
+
+        Float dienTich = Float.valueOf(txtDienTich.getText());
+
+        //        UUID idnha = pR.findByIdNhaTro(tennha);
+        //        nhatro.setId(idnha);
+        //
+        //        UUID idnt = pR.findByIdNT(tennguoithue);
+        //        nguoithue.setId(idnt);
+        //
+        //        int nguoivao = 1;
+        //        int xevao = 1;
+        phong.setTenPhong(tenPhong);
+        phong.setGiaPhong(giaTien);
+        phong.setDienTich(dienTich);
+        phong.setSoNguoiHienCo(soNguoi);
+        phong.setSoXe(soXe);
+        phong.setTinhTrang(tinhTrang);
+        pR.update(phong);
+        JOptionPane.showMessageDialog(this, "thanh cong");
+        LoadTTPhong(pR.getAllData());
+    }//GEN-LAST:event_btnSuaTTPhongActionPerformed
+
+    private void tblTTPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTTPhongMouseClicked
+        // TODO add your handling code here:
+        int index = tblTTPhong.getSelectedRow();
+        Phong nt = pR.getAllData().get(index);
+        txtTenPhong.setText(String.valueOf(nt.getTenPhong()));
+        txtGiaTien.setText(String.valueOf(nt.getGiaPhong()));
+        txtSoXe.setText(String.valueOf(nt.getSoXe()));
+        txtSoNguoiHienCo.setText(String.valueOf(nt.getSoNguoiHienCo()));
+        txtTinhTrang.setText(String.valueOf(nt.getTinhTrang()));
+        txtDienTich.setText(String.valueOf(nt.getDienTich()));
+    }//GEN-LAST:event_tblTTPhongMouseClicked
+
+    private void lbl_anhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhMouseClicked
+        // TODO add your handling code here:
+        try {
+            JFileChooser jfc = new JFileChooser("C:\\Users\\acer\\OneDrive\\Desktop\\Duan1\\PRO1041_IT17309_NHom8-main\\Da1_Nhom7");
+            jfc.showOpenDialog(null);
+            File file = jfc.getSelectedFile();
+            Image img = ImageIO.read(file);
+            hinh = file.getName();
+            lbl_anh.setText("");
+            int width = lbl_anh.getWidth();
+            int height = lbl_anh.getHeight();
+            lbl_anh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("ERROR" + ex.toString());
+        }
+    }//GEN-LAST:event_lbl_anhMouseClicked
+
+    private void btn_clearphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearphongActionPerformed
+        // TODO add your handling code here:
+        txt_tenphong.setText(null);
+        txt_nguoithue.setText(null);
+        txt_giaphong.setText(null);
+        txt_nhatro.setText(null);
+        txt_maphong.setText(null);
+        txt_dientich.setText(null);
+    }//GEN-LAST:event_btn_clearphongActionPerformed
+
+    private void btn_suaphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaphongActionPerformed
+        // TODO add your handling code here:
+        int index = tb_bangtaophong.getSelectedRow();
+        Phong phong = pR.getAllData().get(index);
+        NhaTro nhatro = new NhaTro();
+        NguoiThue nguoithue = new NguoiThue();
+
+        String ma = txt_maphong.getText().trim();
+        String tennha = txt_nhatro.getText().trim();
+        String tennguoithue = txt_nguoithue.getText().trim();
+        String tenphong = txt_tenphong.getText().trim();
+        int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
+        Float dientich = Float.valueOf(txt_dientich.getText());
+
+        UUID idnha = pR.findByIdNhaTro(tennha);
+        nhatro.setId(idnha);
+
+        UUID idnt = pR.findByIdNT(tennguoithue);
+        nguoithue.setId(idnt);
+
+        int nguoivao = 1;
+        int xevao = 1;
+        phong.setMa(ma);
+        phong.setNhaTro(nhatro);
+        phong.setNguoiThue(nguoithue);
+        phong.setTenPhong(tenphong);
+        phong.setGiaPhong(giaphong);
+        phong.setDienTich(dientich);
+        phong.setSoNguoiHienCo(nguoivao);
+        phong.setSoXe(xevao);
+        phong.setHinhAnhHopDong(hinh);
+        pR.update(phong);
+        JOptionPane.showMessageDialog(this, "thanh cong");
+        LoadTaoPhong(pR.getAllData());
+    }//GEN-LAST:event_btn_suaphongActionPerformed
+
+    private void btn_themphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themphongActionPerformed
+        // TODO add your handling code here:
+        if (txt_tenphong.getText().length() == 0 || txt_giaphong.getText().length() == 0 || txt_dientich.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống thông tin");
+        }
+        Phong phong = new Phong();
+        NhaTro nhatro = new NhaTro();
+        NguoiThue nguoithue = new NguoiThue();
+
+        int index = tb_bangtaophong.getRowCount() + 1;
+        String ma = "Ma" + String.valueOf(index);
+        String tennha = txt_nhatro.getText().trim();
+        String tennguoithue = txt_nguoithue.getText().trim();
+        String tenphong = txt_tenphong.getText().trim();
+        int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
+        Float dientich = Float.valueOf(txt_dientich.getText());
+
+        if (pR.findSoNguoiHienCo(tenphong) >= 1) {
+            JOptionPane.showMessageDialog(this, "Phòng đã có người thuê");
+        } else {
+            try {
+                UUID idnha = pR.findByIdNhaTro(tennha);
+                nhatro.setId(idnha);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "ten nha tro sai");
+                e.printStackTrace();
+            }
+            try {
+                UUID idnt = pR.findByIdNT(tennguoithue);
+                nguoithue.setId(idnt);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "ten nguoi thue sai");
+            }
+
+            phong.setMa(ma);
+            phong.setNhaTro(nhatro);
+            phong.setNguoiThue(nguoithue);
+            phong.setTenPhong(tenphong);
+            phong.setGiaPhong(giaphong);
+            phong.setDienTich(dientich);
+            phong.setHinhAnhHopDong(hinh);
+            pR.save(phong);
+            JOptionPane.showMessageDialog(this, "thanh cong");
+            LoadTaoPhong(pR.getAllData());
+            LoadTTPhong(pR.getAllData());
+        }
+    }//GEN-LAST:event_btn_themphongActionPerformed
+
+    private void tb_bangtaophongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangtaophongMouseClicked
+        // TODO add your handling code here:
+        int id = tb_bangtaophong.rowAtPoint(evt.getPoint());
+        String masv = tb_bangtaophong.getValueAt(id, 0).toString();
+        Phong sv = show(masv);
+        fillSinhVienLenForm(sv);
+    }//GEN-LAST:event_tb_bangtaophongMouseClicked
+
+    private void txt_nguoithueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nguoithueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nguoithueActionPerformed
+
+    private void txt_giaphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_giaphongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_giaphongActionPerformed
+
+    private void btn_clearntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearntActionPerformed
+        // TODO add your handling code here:
+        txt_chunha.setText("");
+        txt_diachi.setText("");
+        txt_tennhatro.setText("");
+    }//GEN-LAST:event_btn_clearntActionPerformed
 
     private void btn_suantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suantActionPerformed
         // TODO add your handling code here:
@@ -556,91 +836,12 @@ public class QLNhaTroView extends javax.swing.JFrame {
         txt_diachi.setText(nhatro.getDiaChi());
     }//GEN-LAST:event_tb_bangnhatroMouseClicked
 
-    private void btn_clearntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearntActionPerformed
+    private void txt_diachiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_diachiActionPerformed
         // TODO add your handling code here:
-        txt_chunha.setText("");
-        txt_diachi.setText("");
-        txt_tennhatro.setText("");
-    }//GEN-LAST:event_btn_clearntActionPerformed
+    }//GEN-LAST:event_txt_diachiActionPerformed
 
-    private void txt_giaphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_giaphongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_giaphongActionPerformed
-
-    private void txt_nguoithueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nguoithueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nguoithueActionPerformed
-    
     String hinh = null;
-    
-    private void btn_themphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themphongActionPerformed
-        // TODO add your handling code here:
-        Phong phong = new Phong();
-        NhaTro nhatro = new NhaTro();
-        NguoiThue nguoithue = new NguoiThue();
-        
-        int index = tb_bangtaophong.getRowCount() + 1;
-        String ma = "Ma" + String.valueOf(index);
-        String tennha = txt_nhatro.getText().trim();
-        String tennguoithue = txt_nguoithue.getText().trim();
-        String tenphong = txt_tenphong.getText().trim();
-        int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
-        Float dientich = Float.valueOf(txt_dientich.getText());
-        
-        UUID idnha = pR.findByIdNhaTro(tennha);
-        nhatro.setId(idnha);
-        
-        UUID idnt = pR.findByIdNT(tennguoithue);
-        nguoithue.setId(idnt);        
-        
-        phong.setMa(ma);
-        phong.setNhaTro(nhatro);
-        phong.setNguoiThue(nguoithue);
-        phong.setTenPhong(tenphong);
-        phong.setGiaPhong(giaphong);
-        phong.setDienTich(dientich);
-        phong.setHinhAnhHopDong(hinh);
-        pR.save(phong);
-        JOptionPane.showMessageDialog(this, "thanh cong");
-        LoadTaoPhong(pR.getAllData());
-    }//GEN-LAST:event_btn_themphongActionPerformed
 
-    private void btn_suaphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaphongActionPerformed
-        // TODO add your handling code here:
-        int index = tb_bangtaophong.getSelectedRow();
-        Phong phong = pR.getAllData().get(index);
-        NhaTro nhatro = new NhaTro();
-        NguoiThue nguoithue = new NguoiThue();
-        
-        String ma = txt_maphong.getText().trim();
-        String tennha = txt_nhatro.getText().trim();
-        String tennguoithue = txt_nguoithue.getText().trim();
-        String tenphong = txt_tenphong.getText().trim();
-        int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
-        Float dientich = Float.valueOf(txt_dientich.getText());
-        
-        UUID idnha = pR.findByIdNhaTro(tennha);
-        nhatro.setId(idnha);
-        
-        UUID idnt = pR.findByIdNT(tennguoithue);
-        nguoithue.setId(idnt);
-        
-        int nguoivao = 1;
-        int xevao = 1;
-        phong.setMa(ma);
-        phong.setNhaTro(nhatro);
-        phong.setNguoiThue(nguoithue);
-        phong.setTenPhong(tenphong);
-        phong.setGiaPhong(giaphong);
-        phong.setDienTich(dientich);
-        phong.setSoNguoiHienCo(nguoivao);
-        phong.setSoXe(xevao);
-        phong.setHinhAnhHopDong(hinh);
-        pR.update(phong);
-        JOptionPane.showMessageDialog(this, "thanh cong");
-        LoadTaoPhong(pR.getAllData());
-    }//GEN-LAST:event_btn_suaphongActionPerformed
-    
     public void fillSinhVienLenForm(Phong sv) {
         txt_maphong.setText(sv.getMa());
         txt_nhatro.setText(sv.getNhaTro().getTenNha());
@@ -648,49 +849,19 @@ public class QLNhaTroView extends javax.swing.JFrame {
         txt_tenphong.setText(sv.getTenPhong());
         txt_giaphong.setText(String.valueOf(sv.getGiaPhong()));
         txt_dientich.setText(String.valueOf(sv.getDienTich()));
-        ImageIcon imgIcon = new ImageIcon("E:/GitHub/PRO1041_IT17309_NHom8/Da1_Nhom7/src/main/java/images/" + sv.getHinhAnhHopDong());
+        ImageIcon imgIcon = new ImageIcon("C:/Users/acer/OneDrive/Desktop/Duan1/PRO1041_IT17309_NHom8-main/Da1_Nhom7/src/main/java/images/" + sv.getHinhAnhHopDong());
         Image img = imgIcon.getImage();
         lbl_anh.setIcon(new ImageIcon(img.getScaledInstance(lbl_anh.getWidth(), lbl_anh.getHeight(), 0)));
     }
-    
+
     public Phong show(String maSV) {
         for (Phong sv : pR.getAllData()) {
             if (sv.getMa().equalsIgnoreCase(maSV)) {
-                return sv;  
+                return sv;
             }
         }
         return null;
     }
-    
-    private void tb_bangtaophongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangtaophongMouseClicked
-        // TODO add your handling code here:
-        int id = tb_bangtaophong.rowAtPoint(evt.getPoint());
-        String masv = tb_bangtaophong.getValueAt(id, 0).toString();
-        Phong sv = show(masv);
-        fillSinhVienLenForm(sv);
-    }//GEN-LAST:event_tb_bangtaophongMouseClicked
-
-    private void btn_clearphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearphongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_clearphongActionPerformed
-
-    private void lbl_anhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhMouseClicked
-        // TODO add your handling code here:
-        try {
-            JFileChooser jfc = new JFileChooser("E:\\GitHub\\PRO1041_IT17309_NHom8\\Da1_Nhom7");
-            jfc.showOpenDialog(null);
-            File file = jfc.getSelectedFile();
-            Image img = ImageIO.read(file);
-            hinh = file.getName();
-            lbl_anh.setText("");
-            int width = lbl_anh.getWidth();
-            int height = lbl_anh.getHeight();
-            lbl_anh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            System.out.println("ERROR" + ex.toString());
-        }
-    }//GEN-LAST:event_lbl_anhMouseClicked
 
     /**
      * @param args the command line arguments
@@ -719,16 +890,24 @@ public class QLNhaTroView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new QLNhaTroView().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSuaTTPhong;
     private javax.swing.JButton btn_clearnt;
     private javax.swing.JButton btn_clearphong;
     private javax.swing.JButton btn_suant;
@@ -740,6 +919,8 @@ public class QLNhaTroView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -751,6 +932,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -758,10 +940,18 @@ public class QLNhaTroView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lbl_anh;
     private javax.swing.JTable tb_bangnhatro;
     private javax.swing.JTable tb_bangtaophong;
+    private javax.swing.JTable tblTTPhong;
+    private javax.swing.JTextField txtDienTich;
+    private javax.swing.JTextField txtGiaTien;
+    private javax.swing.JTextField txtSoNguoiHienCo;
+    private javax.swing.JTextField txtSoXe;
+    private javax.swing.JTextField txtTenPhong;
+    private javax.swing.JTextField txtTinhTrang;
     private javax.swing.JTextField txt_chunha;
     private javax.swing.JTextField txt_diachi;
     private javax.swing.JTextField txt_dientich;
