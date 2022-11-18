@@ -7,9 +7,12 @@ package Views;
 import Models.Phong;
 import Models.TienPhong;
 import Models.ChiTietTienPhong;
+import Models.DichVu;
 import Service.IsvCttpImpl;
+import Service.IsvDichVuImpl;
 import Service.IsvTienPhongImpl;
 import Service.impl.CttpImpl;
+import Service.impl.DichVuImpl;
 import Service.impl.TienPhongImpl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +31,7 @@ public class QLTienPhongView extends javax.swing.JFrame {
     private DefaultTableModel dtm;
     private IsvTienPhongImpl tpR = new TienPhongImpl();
     private IsvCttpImpl cttpR = new CttpImpl();
+    private IsvDichVuImpl dvR = new DichVuImpl();
 
     /**
      * Creates new form QLPhongView
@@ -35,6 +39,8 @@ public class QLTienPhongView extends javax.swing.JFrame {
     public QLTienPhongView() {
         initComponents();
         LoadTienPhong(tpR.getAllData());
+        LoadChiTietTienPhong(cttpR.getAllData());
+        LoadDichVu(dvR.getAllData());
     }
 
     private void LoadTienPhong(List<TienPhong> list) {
@@ -57,7 +63,15 @@ public class QLTienPhongView extends javax.swing.JFrame {
                 cttp.getThoiGianBatDau(), cttp.getThoiGianKetThuc(), cttp.getDonGia()});
         }
     }
-
+    
+    private void LoadDichVu(List<DichVu> list) {
+        dtm = (DefaultTableModel) tb_dichvu.getModel();
+        dtm.setRowCount(0);
+        for (DichVu dv : list) {
+            dtm.addRow(new Object[]{
+                dv.getTenDichVu(), dv.getDonGia()});
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

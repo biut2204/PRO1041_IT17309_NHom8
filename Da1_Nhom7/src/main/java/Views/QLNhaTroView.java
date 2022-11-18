@@ -1110,9 +1110,13 @@ public class QLNhaTroView extends javax.swing.JFrame {
         String ten = txt_chunha.getText().trim();
         String tennha = txt_tennhatro.getText().trim();
         String diachi = txt_diachi.getText().trim();
-
-        UUID idcn = ntR.findByIdCN(ten);
-        chunha.setId(idcn);
+        try {
+            UUID idcn = ntR.findByIdCN(ten);
+            chunha.setId(idcn);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ten chu nha khong dung");
+            e.printStackTrace();
+        }
 
         nhatro.setChuNha(chunha);
         nhatro.setTenNha(tennha);
@@ -1161,12 +1165,21 @@ public class QLNhaTroView extends javax.swing.JFrame {
         String tenphong = txt_tenphong.getText().trim();
         int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
         Float dientich = Float.valueOf(txt_dientich.getText());
+        try {
+            UUID idnha = pR.findByIdNhaTro(tennha);
+            nhatro.setId(idnha);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ten nha tro khòn dung");
+            e.printStackTrace();
+        }
+        try {
+            UUID idnt = pR.findByIdNT(tennguoithue);
+            nguoithue.setId(idnt);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ten nguoi thue khong dung");
+            e.printStackTrace();
+        }
 
-        UUID idnha = pR.findByIdNhaTro(tennha);
-        nhatro.setId(idnha);
-
-        UUID idnt = pR.findByIdNT(tennguoithue);
-        nguoithue.setId(idnt);
         if (pR.findSoNguoiHienCo(tenphong) >= 1) {
             JOptionPane.showMessageDialog(this, "da co nguoi thue");
         } else {
@@ -1196,12 +1209,19 @@ public class QLNhaTroView extends javax.swing.JFrame {
         String tenphong = txt_tenphong.getText().trim();
         int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
         Float dientich = Float.valueOf(txt_dientich.getText());
-
-        UUID idnha = pR.findByIdNhaTro(tennha);
-        nhatro.setId(idnha);
-
-        UUID idnt = pR.findByIdNT(tennguoithue);
-        nguoithue.setId(idnt);
+        try {
+            UUID idnha = pR.findByIdNhaTro(tennha);
+            nhatro.setId(idnha);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ten nha tro khong dung");
+            e.printStackTrace();
+        }
+        try {
+            UUID idnt = pR.findByIdNT(tennguoithue);
+            nguoithue.setId(idnt);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ten nguoi thue khong dung");
+        }
 
         int nguoivao = 1;
         int xevao = 1;
@@ -1295,7 +1315,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
         Phong phong = pR.getAllData().get(index);
         String tinhtrang = txt_thongtintinhtrang.getText().trim();
         int songuoi = Integer.parseInt(txt_thongtinsonguoi.getText().trim());
-        
+
         phong.setSoNguoiHienCo(songuoi);
         phong.setTinhTrang(tinhtrang);
         pR.update(phong);
@@ -1391,7 +1411,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
         String tennha = "Nhom 7";
         int index = tb_bangdichvu.getRowCount() + 1;
         String ma = "DichVu" + String.valueOf(index);
-
+        
         UUID idnha = pR.findByIdNhaTro(tennha);
         nt.setId(idnha);
 
@@ -1428,7 +1448,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
             Date ngaysua = java.util.Calendar.getInstance().getTime();
             String noidung = txt_noidunghopdong.getText().trim();
             String trangthai = txt_trangthaihopdong.getText().trim();
-
+            
             UUID idcn = ntR.findByIdCN(tencn);
             cn.setId(idcn);
 
