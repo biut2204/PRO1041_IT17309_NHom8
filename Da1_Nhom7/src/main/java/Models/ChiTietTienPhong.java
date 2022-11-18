@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * @author MSI
  */
 @Entity
-@Table(name = "ChiTietSP")
+@Table(name = "ChiTietTienPhong")
 public class ChiTietTienPhong {
     @Id
     @Column(name = "Id", columnDefinition = "UNIQUEIDENTIFIER")
