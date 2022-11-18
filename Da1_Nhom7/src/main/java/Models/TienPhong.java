@@ -51,6 +51,10 @@ public class TienPhong implements Serializable {
     @Column(name = "GhiChu")
     private String ghiChu;
 
+    public TienPhong() {
+        
+    }
+
     public UUID getId() {
         return id;
     }

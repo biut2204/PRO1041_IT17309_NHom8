@@ -37,6 +37,10 @@ public class NguoiThue {
     @OneToMany(mappedBy = "nguoiThue",
             cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Phong> phongs;
+    
+    @OneToMany(mappedBy = "nguoiThue",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<HopDong> hopDongs;
 
     public UUID getId() {
         return id;
@@ -60,6 +64,14 @@ public class NguoiThue {
 
     public void setPhongs(List<Phong> phongs) {
         this.phongs = phongs;
+    }
+
+    public List<HopDong> getHopDongs() {
+        return hopDongs;
+    }
+
+    public void setHopDongs(List<HopDong> hopDongs) {
+        this.hopDongs = hopDongs;
     }
 
     public String getMa() {
@@ -126,22 +138,11 @@ public class NguoiThue {
         this.trangThai = trangThai;
     }
 
-    public NguoiThue(UUID id, List<TaiKhoan> taiKhoans, List<Phong> phongs, String ma, String hoTen, Date ngaySinh, String gioiTinh, String sdt, String diaChi, String diXe, String trangThai) {
+    public NguoiThue(UUID id, List<TaiKhoan> taiKhoans, List<Phong> phongs, List<HopDong> hopDongs, String ma, String hoTen, Date ngaySinh, String gioiTinh, String sdt, String diaChi, String diXe, String trangThai) {
         this.id = id;
         this.taiKhoans = taiKhoans;
         this.phongs = phongs;
-        this.ma = ma;
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
-        this.gioiTinh = gioiTinh;
-        this.sdt = sdt;
-        this.diaChi = diaChi;
-        this.diXe = diXe;
-        this.trangThai = trangThai;
-    }
-
-    public NguoiThue(UUID id, String ma, String hoTen, Date ngaySinh, String gioiTinh, String sdt, String diaChi, String diXe, String trangThai) {
-        this.id = id;
+        this.hopDongs = hopDongs;
         this.ma = ma;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
