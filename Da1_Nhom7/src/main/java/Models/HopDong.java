@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author MSI Laptop
+ * @author MSI
  */
 @Entity
 @Table(name = "HopDong")

@@ -44,15 +44,13 @@ public class SuCoNhaTro {
     @Column(name = "ThoiGianThongBao")
     private Date thoiGianThongBao;
 
-    public SuCoNhaTro(UUID id, NhaTro nhaTro, ChuNha chuNha, String ma, String tenSuCo, Date thoiGianThongBao, String moTa, String trangThai) {
-        this.id = id;
-        this.nhaTro = nhaTro;
-        this.chuNha = chuNha;
-        this.ma = ma;
-        this.tenSuCo = tenSuCo;
-        this.thoiGianThongBao = thoiGianThongBao;
-        this.moTa = moTa;
-        this.trangThai = trangThai;
+    @Column(name = "MoTa")
+    private String moTa;
+    
+    @Column(name = "TrangThai")
+    private String trangThai;
+    
+    public SuCoNhaTro(){
     }
 
     public UUID getId() {
@@ -118,11 +116,15 @@ public class SuCoNhaTro {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-    
-    @Column(name = "MoTa")
-    private String moTa;
-    
-    @Column(name = "TrangThai")
-    private String trangThai;
-    
+
+    public SuCoNhaTro(UUID id, NhaTro nhaTro, ChuNha chuNha, String ma, String tenSuCo, Date thoiGianThongBao, String moTa, String trangThai) {
+        this.id = id;
+        this.nhaTro = nhaTro;
+        this.chuNha = chuNha;
+        this.ma = ma;
+        this.tenSuCo = tenSuCo;
+        this.thoiGianThongBao = thoiGianThongBao;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+    }
 }
