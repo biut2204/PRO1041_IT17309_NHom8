@@ -621,7 +621,6 @@ public class QLNguoiThueView extends javax.swing.JFrame {
             
         } catch (ParseException ex) {
             Logger.getLogger(QLNguoiThueView.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
         }
     }//GEN-LAST:event_btn_dangkyActionPerformed
 

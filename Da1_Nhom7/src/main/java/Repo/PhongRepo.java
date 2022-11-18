@@ -99,22 +99,10 @@ public class PhongRepo {
         return uuid;
     }
     
-    public Long findXeHienCo(String ten, String diXe) {
-        Long uuid;
-        try ( Session session = HibernateUtils.getFACTORY().openSession()) {
-            String statement = "select Count(p.nguoiThue.diXe) from Phong p where p.tenPhong = :tenPhong and p.nguoiThue.diXe =: diXe ";
-            TypedQuery<Long> query = session.createQuery(statement, Long.class);
-            query.setParameter("tenPhong", ten);
-            query.setParameter("diXe", diXe);
-            uuid = query.getSingleResult();
-        }
-        return uuid;
-    }
-    
     public static void main(String[] args) {
         PhongRepo pR = new PhongRepo();
-        String ten = "P101";
-        Long list = pR.findSoNguoiHienCo(ten);
-        System.out.println(list);
+        String tenphong = "P101";
+        Long sl = pR.findSoNguoiHienCo(tenphong);
+        System.out.println(sl);
     }
 }

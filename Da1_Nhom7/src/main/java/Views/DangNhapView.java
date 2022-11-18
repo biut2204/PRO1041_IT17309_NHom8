@@ -31,7 +31,7 @@ public class DangNhapView extends javax.swing.JFrame {
      */
     public DangNhapView() {
         initComponents();
-        Icon icon = new ImageIcon("obama.png");
+        Icon icon = new ImageIcon("anh.png");
         this.lbl_anh.setIcon(icon);
     }
 
@@ -174,37 +174,30 @@ public class DangNhapView extends javax.swing.JFrame {
 
     private void btn_dangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangnhapActionPerformed
         // TODO add your handling code here:
+        TaiKhoan taiKhoan = new TaiKhoan();
+        String ten = txt_taikhoan.getText().trim();
+        String mk = txt_matkhau.getText().trim();
+        String vaitro = tkR.findById(ten, mk);
+        if (ten.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Khong duoc de trong");
+        } else if (mk.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Khong duoc de trong");
+        }{            
+            if (vaitro.equals("chu nha")) {
+                ChuNhaView f = new ChuNhaView();
+                f.setVisible(true);
+                f.setLocationRelativeTo(null);
 
-        try {
-            TaiKhoan taiKhoan = new TaiKhoan();
-            String ten = txt_taikhoan.getText().trim();
-            String mk = txt_matkhau.getText().trim();
-            String vaitro = tkR.findById(ten, mk);
-            if (ten.length() == 0) {
-                JOptionPane.showMessageDialog(this, "Khong duoc de trong");
-            } else if (mk.length() == 0) {
-                JOptionPane.showMessageDialog(this, "Khong duoc de trong");
-            }else{
-                if (vaitro.equals("chu nha")) {
-                    ChuNhaView f = new ChuNhaView();
+            } else if (vaitro.equals("nguoi thue")) {
+                try {
+                    String mant = tkR.findByIdNguoiThue(ten, mk);
+                    NguoiThueView f = new NguoiThueView(mant);
                     f.setVisible(true);
                     f.setLocationRelativeTo(null);
-
-                } else if (vaitro.equals("nguoi thue")) {
-                    try {
-                        String mant = tkR.findByIdNguoiThue(ten, mk);
-                        NguoiThueView f = new NguoiThueView(mant);
-                        f.setVisible(true);
-                        f.setLocationRelativeTo(null);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(DangNhapView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(DangNhapView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "tai khoan mat khau khong dung");
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btn_dangnhapActionPerformed
 

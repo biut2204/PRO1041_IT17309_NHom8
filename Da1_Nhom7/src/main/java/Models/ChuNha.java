@@ -46,10 +46,6 @@ public class ChuNha {
     @OneToMany(mappedBy = "chuNha",
             cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<NhaTro> nhaTros;
-    
-    @OneToMany(mappedBy = "chuNha",
-            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HopDong> hopDongs;
 
     public UUID getId() {
         return id;
@@ -107,15 +103,7 @@ public class ChuNha {
         this.nhaTros = nhaTros;
     }
 
-    public List<HopDong> getHopDongs() {
-        return hopDongs;
-    }
-
-    public void setHopDongs(List<HopDong> hopDongs) {
-        this.hopDongs = hopDongs;
-    }
-
-    public ChuNha(UUID id, String hoTen, String sdt, String email, String diaChi, List<TaiKhoan> taiKhoans, List<NhaTro> nhaTros, List<HopDong> hopDongs) {
+    public ChuNha(UUID id, String hoTen, String sdt, String email, String diaChi, List<TaiKhoan> taiKhoans, List<NhaTro> nhaTros) {
         this.id = id;
         this.hoTen = hoTen;
         this.sdt = sdt;
@@ -123,7 +111,6 @@ public class ChuNha {
         this.diaChi = diaChi;
         this.taiKhoans = taiKhoans;
         this.nhaTros = nhaTros;
-        this.hopDongs = hopDongs;
     }
     
     public ChuNha(){
