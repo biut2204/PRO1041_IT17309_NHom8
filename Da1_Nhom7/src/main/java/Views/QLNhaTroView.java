@@ -6,17 +6,23 @@ package Views;
 
 import Models.ChuNha;
 import Models.DichVu;
+import Models.HopDong;
 import Models.NguoiThue;
 import Models.NhaTro;
 import Models.Phong;
 import Models.SuCoNhaTro;
 import Service.IsvDichVuImpl;
+import Service.IsvHopDongImpl;
 import Service.IsvNhaTroImpl;
 import Service.IsvPhongImpl;
+import Service.IsvSuCoNhaTroImpl;
+import Service.IsvTienPhongImpl;
 import Service.impl.DichVuImpl;
+import Service.impl.HopDongImpl;
 import Service.impl.NhaTroImpl;
 import Service.impl.PhongImpl;
 import Service.impl.SuCoNhaTroImpl;
+import Service.impl.TienPhongImpl;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -45,9 +51,10 @@ public class QLNhaTroView extends javax.swing.JFrame {
     private DefaultTableModel dtm;
     private IsvNhaTroImpl ntR = new NhaTroImpl();
     private IsvPhongImpl pR = new PhongImpl();
-
+    private IsvSuCoNhaTroImpl scntR = new SuCoNhaTroImpl();
     private IsvDichVuImpl dvR = new DichVuImpl();
- 
+    private IsvHopDongImpl hdR = new HopDongImpl();
+    private IsvTienPhongImpl tpR = new TienPhongImpl();
 
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -60,9 +67,9 @@ public class QLNhaTroView extends javax.swing.JFrame {
         LoadNhaTro(ntR.getAllData());
         LoadTaoPhong(pR.getAllData());
         LoadThongTinPhong(pR.getAllData());
-      
+        LoadSuCoNhaTro(scntR.getAllData());
         LoadDichVu(dvR.getAllData());
-    
+        LoadHopDong(hdR.getAllData());
 
         Icon icon10 = new ImageIcon("obama.PNG");
         this.lbl_anh.setIcon(icon10);
@@ -125,7 +132,15 @@ public class QLNhaTroView extends javax.swing.JFrame {
         }
     }
 
-    
+    private void LoadHopDong(List<HopDong> list) {
+        dtm = (DefaultTableModel) tb_banghopdong.getModel();
+        dtm.setRowCount(0);
+        for (HopDong hd : list) {
+            dtm.addRow(new Object[]{
+                hd.getChuNha().getHoTen(), hd.getNguoiThue().getHoTen(), hd.getPhong().getTenPhong(),
+                hd.getNgayBatDau(), hd.getNgayHetHan(), hd.getNgaySua(), hd.getTrangThai(), hd.getMa()});
+        }
+    }
 
     private void del() {
         txt_maphong.setEditable(false);
@@ -158,7 +173,6 @@ public class QLNhaTroView extends javax.swing.JFrame {
         tb_bangnhatro = new javax.swing.JTable();
         btn_suant = new javax.swing.JButton();
         btn_clearnt = new javax.swing.JButton();
-        btn_themnhatro = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -244,6 +258,8 @@ public class QLNhaTroView extends javax.swing.JFrame {
         txt_noidunghopdong = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
         tb_banghopdong = new javax.swing.JTable();
+        btn_themhopdong = new javax.swing.JButton();
+        btn_suahopdong = new javax.swing.JButton();
         btn_clearhopdong = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -329,13 +345,6 @@ public class QLNhaTroView extends javax.swing.JFrame {
             }
         });
 
-        btn_themnhatro.setText("Them");
-        btn_themnhatro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_themnhatroActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -348,11 +357,9 @@ public class QLNhaTroView extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(btn_themnhatro)
-                        .addGap(66, 66, 66)
+                        .addGap(171, 171, 171)
                         .addComponent(btn_suant)
-                        .addGap(80, 80, 80)
+                        .addGap(125, 125, 125)
                         .addComponent(btn_clearnt)))
                 .addContainerGap(341, Short.MAX_VALUE))
         );
@@ -364,8 +371,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_suant)
-                    .addComponent(btn_clearnt)
-                    .addComponent(btn_themnhatro))
+                    .addComponent(btn_clearnt))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
@@ -978,7 +984,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
                         .addComponent(jLabel29)
                         .addComponent(txt_trangthaihopdong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         tb_banghopdong.setModel(new javax.swing.table.DefaultTableModel(
@@ -994,6 +1000,20 @@ public class QLNhaTroView extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(tb_banghopdong);
 
+        btn_themhopdong.setText("Them");
+        btn_themhopdong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themhopdongActionPerformed(evt);
+            }
+        });
+
+        btn_suahopdong.setText("Sua");
+        btn_suahopdong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suahopdongActionPerformed(evt);
+            }
+        });
+
         btn_clearhopdong.setText("Clear");
         btn_clearhopdong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1008,7 +1028,11 @@ public class QLNhaTroView extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(581, 581, 581)
+                        .addGap(157, 157, 157)
+                        .addComponent(btn_themhopdong)
+                        .addGap(155, 155, 155)
+                        .addComponent(btn_suahopdong)
+                        .addGap(157, 157, 157)
                         .addComponent(btn_clearhopdong))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(95, 95, 95)
@@ -1023,10 +1047,13 @@ public class QLNhaTroView extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_clearhopdong)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_themhopdong)
+                    .addComponent(btn_suahopdong)
+                    .addComponent(btn_clearhopdong))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Hop Dong", jPanel11);
@@ -1070,133 +1097,91 @@ public class QLNhaTroView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_clearhopdongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearhopdongActionPerformed
+    private void txt_diachiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_diachiActionPerformed
         // TODO add your handling code here:
-        txt_chunhahopdong.setText("");
-        txt_nguoithuehopdong.setText("");
-        txt_phonghopdong.setText("");
-        txt_ngaybatdauhopdong.setText("");
-        txt_ngayhethanhopdong.setText("");
-        txt_ngaysuahopdong.setText("");
-        txt_noidunghopdong.setText("");
-        txt_trangthaihopdong.setText("");
-    }//GEN-LAST:event_btn_clearhopdongActionPerformed
+    }//GEN-LAST:event_txt_diachiActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btn_suantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suantActionPerformed
         // TODO add your handling code here:
-        txt_tendichvu.setText("");
-        txt_dongiadichvu.setText("");
-    }//GEN-LAST:event_jButton6ActionPerformed
+        int index = tb_bangnhatro.getSelectedRow();
+        NhaTro nhatro = ntR.getAllData().get(index);
+        ChuNha chunha = new ChuNha();
 
-    private void btn_themdichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themdichvuActionPerformed
+        String ten = txt_chunha.getText().trim();
+        String tennha = txt_tennhatro.getText().trim();
+        String diachi = txt_diachi.getText().trim();
+
+        UUID idcn = ntR.findByIdCN(ten);
+        chunha.setId(idcn);
+
+        nhatro.setChuNha(chunha);
+        nhatro.setTenNha(tennha);
+        nhatro.setDiaChi(diachi);
+        ntR.update(nhatro);
+        JOptionPane.showMessageDialog(this, "thanh cong");
+        LoadNhaTro(ntR.getAllData());
+    }//GEN-LAST:event_btn_suantActionPerformed
+
+    private void tb_bangnhatroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangnhatroMouseClicked
         // TODO add your handling code here:
-        DichVu dv = new DichVu();
-        NhaTro nt = new NhaTro();
+        int index = tb_bangnhatro.getSelectedRow();
+        NhaTro nhatro = ntR.getAllData().get(index);
+        txt_chunha.setText(nhatro.getChuNha().getHoTen());
+        txt_tennhatro.setText(nhatro.getTenNha());
+        txt_diachi.setText(nhatro.getDiaChi());
+    }//GEN-LAST:event_tb_bangnhatroMouseClicked
 
-        String ten = txt_tendichvu.getText().trim();
-        int dongia = Integer.parseInt(txt_dongiadichvu.getText().trim());
-        String tennha = "Nhom 7";
-        int index = tb_bangdichvu.getRowCount() + 1;
-        String ma = "DichVu" + String.valueOf(index);
+    private void btn_clearntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearntActionPerformed
+        // TODO add your handling code here:
+        txt_chunha.setText("");
+        txt_diachi.setText("");
+        txt_tennhatro.setText("");
+    }//GEN-LAST:event_btn_clearntActionPerformed
+
+    private void txt_giaphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_giaphongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_giaphongActionPerformed
+
+    private void txt_nguoithueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nguoithueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nguoithueActionPerformed
+
+    String hinh = null;
+
+    private void btn_themphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themphongActionPerformed
+        // TODO add your handling code here:
+        Phong phong = new Phong();
+        NhaTro nhatro = new NhaTro();
+        NguoiThue nguoithue = new NguoiThue();
+
+        int index = tb_bangtaophong.getRowCount() + 1;
+        String ma = "Ma" + String.valueOf(index);
+        String tennha = txt_nhatro.getText().trim();
+        String tennguoithue = txt_nguoithue.getText().trim();
+        String tenphong = txt_tenphong.getText().trim();
+        int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
+        Float dientich = Float.valueOf(txt_dientich.getText());
 
         UUID idnha = pR.findByIdNhaTro(tennha);
-        nt.setId(idnha);
+        nhatro.setId(idnha);
 
-        dv.setTenDichVu(ten);
-        dv.setDonGia(dongia);
-        dv.setMa(ma);
-        dv.setNhaTro(nt);
-        dvR.save(dv);
-        JOptionPane.showMessageDialog(this, "thanh cong");
-        LoadDichVu(dvR.getAllData());
-    }//GEN-LAST:event_btn_themdichvuActionPerformed
-
-    private void btn_clearsucoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearsucoActionPerformed
-        // TODO add your handling code here:
-        txt_tensuco.setText("");
-        txt_thoigianthongbao.setText("");
-        txt_motasuco.setText("");
-        txt_trangthaisuco.setText("");
-    }//GEN-LAST:event_btn_clearsucoActionPerformed
-
-    private void btn_suachuaxongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suachuaxongActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btn_suachuaxongActionPerformed
-
-    private void btn_thongbaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thongbaoActionPerformed
-       
-    }//GEN-LAST:event_btn_thongbaoActionPerformed
-
-    private void tb_bangsuconhatroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangsuconhatroMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_tb_bangsuconhatroMouseClicked
-
-    private void tb_thongtinphongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_thongtinphongMouseClicked
-        // TODO add your handling code here:
-        int index = tb_thongtinphong.getSelectedRow();
-        Phong p = pR.getAllData().get(index);
-        String xe = "Co";
-        txt_thongtintenphong.setText(p.getTenPhong());
-        txt_thongtinsonguoi.setText(String.valueOf(p.getSoNguoiHienCo()));
-        txt_thongtinsoxe.setText(String.valueOf(pR.findSoXeHienCo(p.getTenPhong(), xe)));
-        txt_thongtindientich.setText(String.valueOf(p.getDienTich()));
-        txt_thongtingiatien.setText(String.valueOf(p.getGiaPhong()));
-        txt_thongtintinhtrang.setText(p.getTinhTrang());
-    }//GEN-LAST:event_tb_thongtinphongMouseClicked
-
-    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
-        // TODO add your handling code here:
-        txt_thongtintenphong.setText("");
-        txt_thongtinsonguoi.setText("");
-        txt_thongtinsoxe.setText("");
-        txt_thongtingiatien.setText("");
-        txt_thongtindientich.setText("");
-        txt_thongtintinhtrang.setText("");
-    }//GEN-LAST:event_btn_clearActionPerformed
-
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        // TODO add your handling code here:
-        int index = tb_thongtinphong.getSelectedRow();
-        Phong phong = pR.getAllData().get(index);
-        String tinhtrang = txt_thongtintinhtrang.getText().trim();
-        int songuoi = Integer.parseInt(txt_thongtinsonguoi.getText().trim());
-
-        phong.setSoNguoiHienCo(songuoi);
-        phong.setTinhTrang(tinhtrang);
-        pR.update(phong);
-        JOptionPane.showMessageDialog(this, "thanh cong");
-        LoadThongTinPhong(pR.getAllData());
-    }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void lbl_anhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhMouseClicked
-        // TODO add your handling code here:
-        try {
-            JFileChooser jfc = new JFileChooser("E:\\GitHub\\PRO1041_IT17309_NHom8\\Da1_Nhom7");
-            jfc.showOpenDialog(null);
-            File file = jfc.getSelectedFile();
-            Image img = ImageIO.read(file);
-            hinh = file.getName();
-            lbl_anh.setText("");
-            int width = lbl_anh.getWidth();
-            int height = lbl_anh.getHeight();
-            lbl_anh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            System.out.println("ERROR" + ex.toString());
+        UUID idnt = pR.findByIdNT(tennguoithue);
+        nguoithue.setId(idnt);
+        if (pR.findSoNguoiHienCo(tenphong) >= 1) {
+            JOptionPane.showMessageDialog(this, "da co nguoi thue");
+        } else {
+            phong.setMa(ma);
+            phong.setNhaTro(nhatro);
+            phong.setNguoiThue(nguoithue);
+            phong.setTenPhong(tenphong);
+            phong.setGiaPhong(giaphong);
+            phong.setDienTich(dientich);
+            phong.setHinhAnhHopDong(hinh);
+            pR.save(phong);
+            JOptionPane.showMessageDialog(this, "thanh cong");
+            LoadTaoPhong(pR.getAllData());
         }
-    }//GEN-LAST:event_lbl_anhMouseClicked
-
-    private void btn_clearphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearphongActionPerformed
-        // TODO add your handling code here:
-        txt_maphong.setText("");
-        txt_nhatro.setText("");
-        txt_tenphong.setText("");
-        txt_nguoithue.setText("");
-        txt_giaphong.setText("");
-        txt_dientich.setText("");
-    }//GEN-LAST:event_btn_clearphongActionPerformed
+    }//GEN-LAST:event_btn_themphongActionPerformed
 
     private void btn_suaphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaphongActionPerformed
         // TODO add your handling code here:
@@ -1234,120 +1219,6 @@ public class QLNhaTroView extends javax.swing.JFrame {
         LoadTaoPhong(pR.getAllData());
     }//GEN-LAST:event_btn_suaphongActionPerformed
 
-    private void btn_themphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themphongActionPerformed
-        // TODO add your handling code here:
-        Phong phong = new Phong();
-        NhaTro nhatro = new NhaTro();
-        NguoiThue nguoithue = new NguoiThue();
-
-        int index = tb_bangtaophong.getRowCount() + 1;
-        String ma = "Ma" + String.valueOf(index);
-        String tennha = txt_nhatro.getText().trim();
-        String tennguoithue = txt_nguoithue.getText().trim();
-        String tenphong = txt_tenphong.getText().trim();
-        int giaphong = Integer.parseInt(txt_giaphong.getText().trim());
-        Float dientich = Float.valueOf(txt_dientich.getText());
-
-        UUID idnha = pR.findByIdNhaTro(tennha);
-        nhatro.setId(idnha);
-
-        UUID idnt = pR.findByIdNT(tennguoithue);
-        nguoithue.setId(idnt);
-        if (pR.findSoNguoiHienCo(tenphong) >= 1) {
-            JOptionPane.showMessageDialog(this, "da co nguoi thue");
-        } else {
-            phong.setMa(ma);
-            phong.setNhaTro(nhatro);
-            phong.setNguoiThue(nguoithue);
-            phong.setTenPhong(tenphong);
-            phong.setGiaPhong(giaphong);
-            phong.setDienTich(dientich);
-            phong.setHinhAnhHopDong(hinh);
-            pR.save(phong);
-            JOptionPane.showMessageDialog(this, "thanh cong");
-            LoadTaoPhong(pR.getAllData());
-        }
-    }//GEN-LAST:event_btn_themphongActionPerformed
-
-    private void tb_bangtaophongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangtaophongMouseClicked
-        // TODO add your handling code here:
-        int id = tb_bangtaophong.rowAtPoint(evt.getPoint());
-        String masv = tb_bangtaophong.getValueAt(id, 0).toString();
-        Phong sv = show(masv);
-        fillSinhVienLenForm(sv);
-    }//GEN-LAST:event_tb_bangtaophongMouseClicked
-
-    private void txt_nguoithueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nguoithueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nguoithueActionPerformed
-
-    private void txt_giaphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_giaphongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_giaphongActionPerformed
-
-    private void btn_clearntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearntActionPerformed
-        // TODO add your handling code here:
-        txt_chunha.setText("");
-        txt_diachi.setText("");
-        txt_tennhatro.setText("");
-    }//GEN-LAST:event_btn_clearntActionPerformed
-
-    private void btn_suantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suantActionPerformed
-        // TODO add your handling code here:
-        int index = tb_bangnhatro.getSelectedRow();
-        NhaTro nhatro = ntR.getAllData().get(index);
-        ChuNha chunha = new ChuNha();
-
-        String ten = txt_chunha.getText().trim();
-        String tennha = txt_tennhatro.getText().trim();
-        String diachi = txt_diachi.getText().trim();
-
-        UUID idcn = ntR.findByIdCN(ten);
-        chunha.setId(idcn);
-
-        nhatro.setChuNha(chunha);
-        nhatro.setTenNha(tennha);
-        nhatro.setDiaChi(diachi);
-        ntR.update(nhatro);
-        JOptionPane.showMessageDialog(this, "thanh cong");
-        LoadNhaTro(ntR.getAllData());
-    }//GEN-LAST:event_btn_suantActionPerformed
-
-    private void tb_bangnhatroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangnhatroMouseClicked
-        // TODO add your handling code here:
-        int index = tb_bangnhatro.getSelectedRow();
-        NhaTro nhatro = ntR.getAllData().get(index);
-        txt_chunha.setText(nhatro.getChuNha().getHoTen());
-        txt_tennhatro.setText(nhatro.getTenNha());
-        txt_diachi.setText(nhatro.getDiaChi());
-    }//GEN-LAST:event_tb_bangnhatroMouseClicked
-
-    private void txt_diachiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_diachiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_diachiActionPerformed
-
-    private void btn_themnhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themnhatroActionPerformed
-        // TODO add your handling code here:
-        NhaTro nhatro = new NhaTro();
-        ChuNha chunha = new ChuNha();
-
-        String ten = txt_chunha.getText().trim();
-        String tennha = txt_tennhatro.getText().trim();
-        String diachi = txt_diachi.getText().trim();
-
-        UUID idcn = ntR.findByIdCN(ten);
-        chunha.setId(idcn);
-
-        nhatro.setChuNha(chunha);
-        nhatro.setTenNha(tennha);
-        nhatro.setDiaChi(diachi);
-        ntR.save(nhatro);
-        JOptionPane.showMessageDialog(this, "thanh cong");
-        LoadNhaTro(ntR.getAllData());
-    }//GEN-LAST:event_btn_themnhatroActionPerformed
-
-    String hinh = null;
-
     public void fillSinhVienLenForm(Phong sv) {
         txt_maphong.setText(sv.getMa());
         txt_nhatro.setText(sv.getNhaTro().getTenNha());
@@ -1368,6 +1239,276 @@ public class QLNhaTroView extends javax.swing.JFrame {
         }
         return null;
     }
+
+    private void tb_bangtaophongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangtaophongMouseClicked
+        // TODO add your handling code here:
+        int id = tb_bangtaophong.rowAtPoint(evt.getPoint());
+        String masv = tb_bangtaophong.getValueAt(id, 0).toString();
+        Phong sv = show(masv);
+        fillSinhVienLenForm(sv);
+    }//GEN-LAST:event_tb_bangtaophongMouseClicked
+
+    private void btn_clearphongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearphongActionPerformed
+        // TODO add your handling code here:
+        txt_maphong.setText("");
+        txt_nhatro.setText("");
+        txt_tenphong.setText("");
+        txt_nguoithue.setText("");
+        txt_giaphong.setText("");
+        txt_dientich.setText("");
+    }//GEN-LAST:event_btn_clearphongActionPerformed
+
+    private void lbl_anhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhMouseClicked
+        // TODO add your handling code here:
+        try {
+            JFileChooser jfc = new JFileChooser("E:\\GitHub\\PRO1041_IT17309_NHom8\\Da1_Nhom7");
+            jfc.showOpenDialog(null);
+            File file = jfc.getSelectedFile();
+            Image img = ImageIO.read(file);
+            hinh = file.getName();
+            lbl_anh.setText("");
+            int width = lbl_anh.getWidth();
+            int height = lbl_anh.getHeight();
+            lbl_anh.setIcon(new ImageIcon(img.getScaledInstance(width, height, 0)));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("ERROR" + ex.toString());
+        }
+    }//GEN-LAST:event_lbl_anhMouseClicked
+
+    private void tb_thongtinphongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_thongtinphongMouseClicked
+        // TODO add your handling code here:
+        int index = tb_thongtinphong.getSelectedRow();
+        Phong p = pR.getAllData().get(index);
+        String xe = "Co";
+        txt_thongtintenphong.setText(p.getTenPhong());
+        txt_thongtinsonguoi.setText(String.valueOf(p.getSoNguoiHienCo()));
+        txt_thongtinsoxe.setText(String.valueOf(pR.findSoXeHienCo(p.getTenPhong(), xe)));
+        txt_thongtindientich.setText(String.valueOf(p.getDienTich()));
+        txt_thongtingiatien.setText(String.valueOf(p.getGiaPhong()));
+        txt_thongtintinhtrang.setText(p.getTinhTrang());
+    }//GEN-LAST:event_tb_thongtinphongMouseClicked
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        // TODO add your handling code here:
+        int index = tb_thongtinphong.getSelectedRow();
+        Phong phong = pR.getAllData().get(index);
+        String tinhtrang = txt_thongtintinhtrang.getText().trim();
+        int songuoi = Integer.parseInt(txt_thongtinsonguoi.getText().trim());
+        
+        phong.setSoNguoiHienCo(songuoi);
+        phong.setTinhTrang(tinhtrang);
+        pR.update(phong);
+        JOptionPane.showMessageDialog(this, "thanh cong");
+        LoadThongTinPhong(pR.getAllData());
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_thongbaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thongbaoActionPerformed
+        try {
+            // TODO add your handling code here:
+            SuCoNhaTro scnt = new SuCoNhaTro();
+            NhaTro nt = new NhaTro();
+            ChuNha cn = new ChuNha();
+
+            int index = tb_bangsuconhatro.getRowCount() + 1;
+            String ma = "SuCo" + String.valueOf(index);
+            String ten = txt_tensuco.getText().trim();
+            Date ngay = sdf.parse(txt_thoigianthongbao.getText().trim());
+            String mota = txt_motasuco.getText().trim();
+            String trangthai = "đang sửa";
+
+            String tennha = "Nhom 7";
+            String tenchunha = "admin";
+
+            UUID idnha = pR.findByIdNhaTro(tennha);
+            nt.setId(idnha);
+
+            UUID idchunha = ntR.findByIdCN(tenchunha);
+            cn.setId(idchunha);
+
+            scnt.setTenSuCo(ten);
+            scnt.setThoiGianThongBao(ngay);
+            scnt.setMoTa(mota);
+            scnt.setTrangThai(trangthai);
+            scnt.setNhaTro(nt);
+            scnt.setChuNha(cn);
+            scnt.setMa(ma);
+            scntR.save(scnt);
+            JOptionPane.showMessageDialog(this, "thanh cong");
+            LoadSuCoNhaTro(scntR.getAllData());
+        } catch (ParseException ex) {
+            Logger.getLogger(QLNhaTroView.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_thongbaoActionPerformed
+
+    private void btn_suachuaxongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suachuaxongActionPerformed
+        // TODO add your handling code here:
+        int index = tb_bangsuconhatro.getSelectedRow();
+        SuCoNhaTro scnt = scntR.getAllData().get(index);
+        String trangthai = "sửa xong";
+        scnt.setTrangThai(trangthai);
+        scntR.update(scnt);
+        JOptionPane.showMessageDialog(this, "thanh cong");
+        LoadSuCoNhaTro(scntR.getAllData());
+    }//GEN-LAST:event_btn_suachuaxongActionPerformed
+
+    private void tb_bangsuconhatroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangsuconhatroMouseClicked
+        // TODO add your handling code here:
+        int index = tb_bangsuconhatro.getSelectedRow();
+        SuCoNhaTro scnt = scntR.getAllData().get(index);
+        txt_tensuco.setText(scnt.getTenSuCo());
+        txt_thoigianthongbao.setText(String.valueOf(scnt.getThoiGianThongBao()));
+        txt_motasuco.setText(scnt.getMoTa());
+        txt_trangthaisuco.setText(scnt.getTrangThai());
+    }//GEN-LAST:event_tb_bangsuconhatroMouseClicked
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        // TODO add your handling code here:
+        txt_thongtintenphong.setText("");
+        txt_thongtinsonguoi.setText("");
+        txt_thongtinsoxe.setText("");
+        txt_thongtingiatien.setText("");
+        txt_thongtindientich.setText("");
+        txt_thongtintinhtrang.setText("");
+    }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void btn_clearsucoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearsucoActionPerformed
+        // TODO add your handling code here:
+        txt_tensuco.setText("");
+        txt_thoigianthongbao.setText("");
+        txt_motasuco.setText("");
+        txt_trangthaisuco.setText("");
+    }//GEN-LAST:event_btn_clearsucoActionPerformed
+
+    private void btn_themdichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themdichvuActionPerformed
+        // TODO add your handling code here:
+        DichVu dv = new DichVu();
+        NhaTro nt = new NhaTro();
+
+        String ten = txt_tendichvu.getText().trim();
+        int dongia = Integer.parseInt(txt_dongiadichvu.getText().trim());
+        String tennha = "Nhom 7";
+        int index = tb_bangdichvu.getRowCount() + 1;
+        String ma = "DichVu" + String.valueOf(index);
+
+        UUID idnha = pR.findByIdNhaTro(tennha);
+        nt.setId(idnha);
+
+        dv.setTenDichVu(ten);
+        dv.setDonGia(dongia);
+        dv.setMa(ma);
+        dv.setNhaTro(nt);
+        dvR.save(dv);
+        JOptionPane.showMessageDialog(this, "thanh cong");
+        LoadDichVu(dvR.getAllData());
+    }//GEN-LAST:event_btn_themdichvuActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        txt_tendichvu.setText("");
+        txt_dongiadichvu.setText("");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void btn_themhopdongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themhopdongActionPerformed
+        try {
+            // TODO add your handling code here:
+            HopDong hd = new HopDong();
+            ChuNha cn = new ChuNha();
+            NguoiThue nt = new NguoiThue();
+            Phong p = new Phong();
+
+            int index = tb_banghopdong.getRowCount() + 1;
+            String ma = "HopDong" + String.valueOf(index);
+            String tencn = txt_chunhahopdong.getText().trim();
+            String tennt = txt_nguoithuehopdong.getText().trim();
+            String tenp = txt_phonghopdong.getText().trim();
+            Date ngaybatdau = sdf.parse(txt_ngaybatdauhopdong.getText().trim());
+            Date ngayhethan = sdf.parse(txt_ngayhethanhopdong.getText().trim());
+            Date ngaysua = java.util.Calendar.getInstance().getTime();
+            String noidung = txt_noidunghopdong.getText().trim();
+            String trangthai = txt_trangthaihopdong.getText().trim();
+
+            UUID idcn = ntR.findByIdCN(tencn);
+            cn.setId(idcn);
+
+            UUID idp = tpR.findByIdPhong(tenp);
+            p.setId(idp);
+
+            UUID idnt = pR.findByIdNT(tennt);
+            nt.setId(idnt);
+
+            hd.setMa(ma);
+            hd.setNguoiThue(nt);
+            hd.setChuNha(cn);
+            hd.setPhong(p);
+            hd.setNgayBatDau(ngaybatdau);
+            hd.setNgayHetHan(ngayhethan);
+            hd.setNgaySua(ngaysua);
+            hd.setNoiDung(noidung);
+            hd.setTrangThai(trangthai);
+            hdR.save(hd);
+            JOptionPane.showMessageDialog(this, "thanh cong");
+            LoadHopDong(hdR.getAllData());
+        } catch (ParseException ex) {
+            Logger.getLogger(QLNhaTroView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_themhopdongActionPerformed
+
+    private void btn_suahopdongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suahopdongActionPerformed
+        try {
+            // TODO add your handling code here:
+            int index = tb_banghopdong.getSelectedRow();
+            HopDong hd = hdR.getAllData().get(index);
+            ChuNha cn = new ChuNha();
+            NguoiThue nt = new NguoiThue();
+            Phong p = new Phong();
+
+            String tencn = txt_chunha.getText().trim();
+            String tennt = txt_nguoithuehopdong.getText().trim();
+            String tenp = txt_phonghopdong.getText().trim();
+            Date ngaybatdau = sdf.parse(txt_ngaybatdauhopdong.getText().trim());
+            Date ngayhethan = sdf.parse(txt_ngayhethanhopdong.getText().trim());
+            Date ngaysua = java.util.Calendar.getInstance().getTime();
+            String noidung = txt_noidunghopdong.getText().trim();
+            String trangthai = txt_trangthaihopdong.getText().trim();
+
+            UUID idcn = ntR.findByIdCN(tencn);
+            cn.setId(idcn);
+
+            UUID idp = tpR.findByIdPhong(tenp);
+            p.setId(idp);
+
+            UUID idnt = pR.findByIdNT(tennt);
+            nt.setId(idnt);
+
+            hd.setNguoiThue(nt);
+            hd.setChuNha(cn);
+            hd.setPhong(p);
+            hd.setNgayBatDau(ngaybatdau);
+            hd.setNgayHetHan(ngayhethan);
+            hd.setNgaySua(ngaysua);
+            hd.setNoiDung(noidung);
+            hd.setTrangThai(trangthai);
+            hdR.update(hd);
+            JOptionPane.showMessageDialog(this, "thanh cong");
+            LoadHopDong(hdR.getAllData());
+        } catch (ParseException ex) {
+            Logger.getLogger(QLNhaTroView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_suahopdongActionPerformed
+
+    private void btn_clearhopdongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearhopdongActionPerformed
+        // TODO add your handling code here:
+        txt_chunhahopdong.setText("");
+        txt_nguoithuehopdong.setText("");
+        txt_phonghopdong.setText("");
+        txt_ngaybatdauhopdong.setText("");
+        txt_ngayhethanhopdong.setText("");
+        txt_ngaysuahopdong.setText("");
+        txt_noidunghopdong.setText("");
+        txt_trangthaihopdong.setText("");
+    }//GEN-LAST:event_btn_clearhopdongActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1396,6 +1537,8 @@ public class QLNhaTroView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1412,10 +1555,11 @@ public class QLNhaTroView extends javax.swing.JFrame {
     private javax.swing.JButton btn_clearphong;
     private javax.swing.JButton btn_clearsuco;
     private javax.swing.JButton btn_suachuaxong;
+    private javax.swing.JButton btn_suahopdong;
     private javax.swing.JButton btn_suant;
     private javax.swing.JButton btn_suaphong;
     private javax.swing.JButton btn_themdichvu;
-    private javax.swing.JButton btn_themnhatro;
+    private javax.swing.JButton btn_themhopdong;
     private javax.swing.JButton btn_themphong;
     private javax.swing.JButton btn_thongbao;
     private javax.swing.JButton btn_update;
