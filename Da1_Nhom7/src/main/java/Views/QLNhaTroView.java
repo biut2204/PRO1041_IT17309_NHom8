@@ -6,19 +6,14 @@ package Views;
 
 import Models.ChuNha;
 import Models.DichVu;
-import Models.HopDong;
 import Models.NguoiThue;
 import Models.NhaTro;
 import Models.Phong;
 import Models.SuCoNhaTro;
 import Service.IsvDichVuImpl;
-import Service.IsvHopDongImpl;
 import Service.IsvNhaTroImpl;
 import Service.IsvPhongImpl;
-import Service.IsvSuCoNhaTroImpl;
-import Service.IsvTienPhongImpl;
 import Service.impl.DichVuImpl;
-import Service.impl.HopDongImpl;
 import Service.impl.NhaTroImpl;
 import Service.impl.PhongImpl;
 import Service.impl.SuCoNhaTroImpl;
@@ -50,9 +45,9 @@ public class QLNhaTroView extends javax.swing.JFrame {
     private DefaultTableModel dtm;
     private IsvNhaTroImpl ntR = new NhaTroImpl();
     private IsvPhongImpl pR = new PhongImpl();
-    private IsvSuCoNhaTroImpl scntR = new SuCoNhaTroImpl();
+
     private IsvDichVuImpl dvR = new DichVuImpl();
-    private IsvHopDongImpl hdR = new HopDongImpl();
+ 
 
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -65,9 +60,9 @@ public class QLNhaTroView extends javax.swing.JFrame {
         LoadNhaTro(ntR.getAllData());
         LoadTaoPhong(pR.getAllData());
         LoadThongTinPhong(pR.getAllData());
-        LoadSuCoNhaTro(scntR.getAllData());
+      
         LoadDichVu(dvR.getAllData());
-        LoadHopDong(hdR.getAllData());
+    
 
         Icon icon10 = new ImageIcon("obama.PNG");
         this.lbl_anh.setIcon(icon10);
@@ -130,15 +125,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
         }
     }
 
-    private void LoadHopDong(List<HopDong> list) {
-        dtm = (DefaultTableModel) tb_banghopdong.getModel();
-        dtm.setRowCount(0);
-        for (HopDong hd : list) {
-            dtm.addRow(new Object[]{
-                hd.getChuNha().getHoTen(), hd.getNguoiThue().getHoTen(), hd.getPhong().getTenPhong(),
-                hd.getNgayBatDau(), hd.getNgayHetHan(), hd.getNgaySua(), hd.getTrangThai(), hd.getMa()});
-        }
-    }
+    
 
     private void del() {
         txt_maphong.setEditable(false);
@@ -171,6 +158,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
         tb_bangnhatro = new javax.swing.JTable();
         btn_suant = new javax.swing.JButton();
         btn_clearnt = new javax.swing.JButton();
+        btn_themnhatro = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -341,6 +329,13 @@ public class QLNhaTroView extends javax.swing.JFrame {
             }
         });
 
+        btn_themnhatro.setText("Them");
+        btn_themnhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themnhatroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -353,9 +348,11 @@ public class QLNhaTroView extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
+                        .addGap(145, 145, 145)
+                        .addComponent(btn_themnhatro)
+                        .addGap(66, 66, 66)
                         .addComponent(btn_suant)
-                        .addGap(125, 125, 125)
+                        .addGap(80, 80, 80)
                         .addComponent(btn_clearnt)))
                 .addContainerGap(341, Short.MAX_VALUE))
         );
@@ -367,7 +364,8 @@ public class QLNhaTroView extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_suant)
-                    .addComponent(btn_clearnt))
+                    .addComponent(btn_clearnt)
+                    .addComponent(btn_themnhatro))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
@@ -1132,12 +1130,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
 
     private void tb_bangsuconhatroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangsuconhatroMouseClicked
         // TODO add your handling code here:
-        int index = tb_bangsuconhatro.getSelectedRow();
-        SuCoNhaTro scnt = scntR.getAllData().get(index);
-        txt_tensuco.setText(scnt.getTenSuCo());
-        txt_thoigianthongbao.setText(String.valueOf(scnt.getThoiGianThongBao()));
-        txt_motasuco.setText(scnt.getMoTa());
-        txt_trangthaisuco.setText(scnt.getTrangThai());
+        
     }//GEN-LAST:event_tb_bangsuconhatroMouseClicked
 
     private void tb_thongtinphongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_thongtinphongMouseClicked
@@ -1333,6 +1326,26 @@ public class QLNhaTroView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_diachiActionPerformed
 
+    private void btn_themnhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themnhatroActionPerformed
+        // TODO add your handling code here:
+        NhaTro nhatro = new NhaTro();
+        ChuNha chunha = new ChuNha();
+
+        String ten = txt_chunha.getText().trim();
+        String tennha = txt_tennhatro.getText().trim();
+        String diachi = txt_diachi.getText().trim();
+
+        UUID idcn = ntR.findByIdCN(ten);
+        chunha.setId(idcn);
+
+        nhatro.setChuNha(chunha);
+        nhatro.setTenNha(tennha);
+        nhatro.setDiaChi(diachi);
+        ntR.save(nhatro);
+        JOptionPane.showMessageDialog(this, "thanh cong");
+        LoadNhaTro(ntR.getAllData());
+    }//GEN-LAST:event_btn_themnhatroActionPerformed
+
     String hinh = null;
 
     public void fillSinhVienLenForm(Phong sv) {
@@ -1402,6 +1415,7 @@ public class QLNhaTroView extends javax.swing.JFrame {
     private javax.swing.JButton btn_suant;
     private javax.swing.JButton btn_suaphong;
     private javax.swing.JButton btn_themdichvu;
+    private javax.swing.JButton btn_themnhatro;
     private javax.swing.JButton btn_themphong;
     private javax.swing.JButton btn_thongbao;
     private javax.swing.JButton btn_update;

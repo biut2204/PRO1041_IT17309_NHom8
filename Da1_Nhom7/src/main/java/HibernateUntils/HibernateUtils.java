@@ -7,6 +7,7 @@ package HibernateUntils;
 import Models.ChiTietTienPhong;
 import Models.ChuNha;
 import Models.DichVu;
+import Models.HopDong;
 import Models.NguoiThue;
 import Models.NhaTro;
 import Models.Phong;
@@ -53,6 +54,7 @@ public class HibernateUtils {
         conf.addAnnotatedClass(SuCoKH.class);
         conf.addAnnotatedClass(TienPhong.class);
         conf.addAnnotatedClass(ChiTietTienPhong.class);
+        conf.addAnnotatedClass(HopDong.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();

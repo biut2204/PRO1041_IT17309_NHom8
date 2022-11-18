@@ -90,9 +90,11 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                                  <Component id="btn_themnhatro" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                                   <Component id="btn_suant" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                                   <Component id="btn_clearnt" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -109,6 +111,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_suant" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_clearnt" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_themnhatro" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="145" max="-2" attributes="0"/>
@@ -256,6 +259,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_clearntActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btn_themnhatro">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Them"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themnhatroActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
