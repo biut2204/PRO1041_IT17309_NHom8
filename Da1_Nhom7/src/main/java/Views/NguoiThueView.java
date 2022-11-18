@@ -205,7 +205,7 @@ public class NguoiThueView extends javax.swing.JFrame {
             .addGap(0, 428, Short.MAX_VALUE)
         );
 
-        jTabbedPane5.addTab("tab2", jPanel2);
+        jTabbedPane5.addTab("Su co phong", jPanel2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -218,7 +218,7 @@ public class NguoiThueView extends javax.swing.JFrame {
             .addGap(0, 428, Short.MAX_VALUE)
         );
 
-        jTabbedPane5.addTab("tab3", jPanel3);
+        jTabbedPane5.addTab("Dich vu", jPanel3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -231,7 +231,7 @@ public class NguoiThueView extends javax.swing.JFrame {
             .addGap(0, 428, Short.MAX_VALUE)
         );
 
-        jTabbedPane5.addTab("tab4", jPanel4);
+        jTabbedPane5.addTab("Tien phong", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

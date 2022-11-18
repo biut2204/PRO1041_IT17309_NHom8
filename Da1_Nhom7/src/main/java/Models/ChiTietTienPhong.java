@@ -30,44 +30,8 @@ public class ChiTietTienPhong {
     @JoinColumn(name = "TienPhongID",referencedColumnName = "Id")
     private TienPhong tienPhong;
     
-    @ManyToOne
-    @JoinColumn(name = "DichVuID")
-    private DichVu dichVu;
-    
-    @Column(name ="Ma")
-    private String ma;
-    
-    @Column(name ="BangKeDien")
-    private int bangKeDien;
-    
-    @Column(name ="BangKeNuoc")
-    private int bangKeNuoc;
-    
-    @Column(name ="DonGiaDien")
-    private int donGiaDien;
-    
-    @Column(name ="DonGiaNuoc")
-    private int donGiaNuoc;
-    
-    @Column(name ="ThoiGianBatDau")
-    private Date thoiGianBatDau;
-    
-    @Column(name ="ThoiGianKetThuc")
-    private Date thoiGianKetThuc;
-
-    public ChiTietTienPhong(UUID id, TienPhong tienPhong, DichVu dichVu, String ma, int bangKeDien, int bangKeNuoc, int donGiaDien, int donGiaNuoc, Date thoiGianBatDau, Date thoiGianKetThuc, int donGia) {
-        this.id = id;
-        this.tienPhong = tienPhong;
-        this.dichVu = dichVu;
-        this.ma = ma;
-        this.bangKeDien = bangKeDien;
-        this.bangKeNuoc = bangKeNuoc;
-        this.donGiaDien = donGiaDien;
-        this.donGiaNuoc = donGiaNuoc;
-        this.thoiGianBatDau = thoiGianBatDau;
-        this.thoiGianKetThuc = thoiGianKetThuc;
-        this.donGia = donGia;
-    }
+    @Column(name = "DichVu")
+    private int dichVu;
 
     public UUID getId() {
         return id;
@@ -85,11 +49,11 @@ public class ChiTietTienPhong {
         this.tienPhong = tienPhong;
     }
 
-    public DichVu getDichVu() {
+    public int getDichVu() {
         return dichVu;
     }
 
-    public void setDichVu(DichVu dichVu) {
+    public void setDichVu(int dichVu) {
         this.dichVu = dichVu;
     }
 
@@ -156,6 +120,41 @@ public class ChiTietTienPhong {
     public void setDonGia(int donGia) {
         this.donGia = donGia;
     }
+
+    public ChiTietTienPhong(UUID id, TienPhong tienPhong, int dichVu, String ma, int bangKeDien, int bangKeNuoc, int donGiaDien, int donGiaNuoc, Date thoiGianBatDau, Date thoiGianKetThuc, int donGia) {
+        this.id = id;
+        this.tienPhong = tienPhong;
+        this.dichVu = dichVu;
+        this.ma = ma;
+        this.bangKeDien = bangKeDien;
+        this.bangKeNuoc = bangKeNuoc;
+        this.donGiaDien = donGiaDien;
+        this.donGiaNuoc = donGiaNuoc;
+        this.thoiGianBatDau = thoiGianBatDau;
+        this.thoiGianKetThuc = thoiGianKetThuc;
+        this.donGia = donGia;
+    }
+    
+    @Column(name ="Ma")
+    private String ma;
+    
+    @Column(name ="BangKeDien")
+    private int bangKeDien;
+    
+    @Column(name ="BangKeNuoc")
+    private int bangKeNuoc;
+    
+    @Column(name ="DonGiaDien")
+    private int donGiaDien;
+    
+    @Column(name ="DonGiaNuoc")
+    private int donGiaNuoc;
+    
+    @Column(name ="ThoiGianBatDau")
+    private Date thoiGianBatDau;
+    
+    @Column(name ="ThoaiGianKetThuc")
+    private Date thoiGianKetThuc;
     
     @Column(name ="DonGia")
     private int donGia;
